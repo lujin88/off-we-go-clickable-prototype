@@ -1,0 +1,218 @@
+/* Shared design-system controls. Load after page CSS so tokens win over
+   one-off recreations. Page CSS may refine layout, not recreate these. */
+
+:is(button, input, select, textarea) {
+  font-family: var(--font);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+  z-index: 70;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+  transform: translateY(-160%);
+  box-shadow: var(--shadow-2);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: none;
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.primary,
+.outline,
+.text-action,
+.back {
+  min-height: var(--touch-min);
+}
+
+.primary,
+.outline {
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-weight: var(--weight-bold);
+}
+
+.primary {
+  border: 0;
+  background: var(--blue);
+  color: var(--on-accent);
+}
+
+.primary:hover {
+  background: var(--blue2);
+}
+
+.primary:active,
+.outline:active,
+.text-action:active {
+  transform: scale(var(--press-scale));
+}
+
+.outline {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.outline:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.text-action {
+  border: 0;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: var(--weight-bold);
+}
+
+.text-action:hover {
+  background: var(--blue-hover);
+}
+
+.back {
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-weight: var(--weight-bold);
+  padding: 0;
+}
+
+.icon,
+button.settings {
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+}
+
+.stepper button,
+.counter-controls button {
+  width: var(--touch-min);
+  height: var(--touch-min);
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  border-color: var(--field-border);
+}
+
+.number-list span,
+.live-photo-attribution,
+.origin-help,
+.emergency-explainer {
+  font-size: var(--text-xs);
+  line-height: var(--leading);
+}
+
+.hero-note small {
+  opacity: 1;
+  color: var(--on-accent);
+}
+
+.hint b {
+  color: var(--warm-ink);
+}
+
+/* Outbound text links. Not a button: blue type + Remix external icon. */
+.external-link,
+.google-map-link,
+.booking-link,
+.rental-google-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 13px;
+  color: var(--blue);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.external-link i,
+.google-map-link i,
+.booking-link i,
+.rental-google-link i {
+  flex: none;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.external-link:hover,
+.google-map-link:hover,
+.booking-link:hover,
+.rental-google-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+:is(button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+:is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  select,
+  textarea
+) {
+  min-height: var(--field-height);
+  border: 1px solid var(--field-border);
+  border-radius: var(--field-radius);
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--field-padding);
+}
+
+:is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  select,
+  textarea
+):focus-visible {
+  outline: 0;
+  border-color: var(--blue);
+  box-shadow: var(--field-focus-ring);
+}
+
+.destination,
+.flow-option,
+.holiday-choice,
+.budget-card,
+.stay-card,
+.transport-card {
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+html[data-language="en"]:not([data-i18n-ready]) body {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:active,
+  .outline:active,
+  .text-action:active {
+    transform: none;
+  }
+}

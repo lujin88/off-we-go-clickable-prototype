@@ -1,0 +1,252 @@
+/* Shared settings sheet for the workbench modal and trip-detail panel.
+   Load after page CSS. Never style bare .settings — that class is the
+   trip-detail gear button. */
+
+.modal,
+.settings-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  padding: 48px 24px;
+  overflow: auto;
+  background: var(--overlay);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.modal.show,
+.settings-panel.show {
+  display: grid;
+  place-items: start center;
+}
+
+.modal > .settings,
+.settings-sheet {
+  width: min(var(--sheet-max), 100%);
+  max-height: calc(100dvh - 96px);
+  margin: auto;
+  overflow: auto;
+  padding: 34px 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--paper);
+  box-shadow: var(--shadow-3);
+}
+
+.modal-head,
+.settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-head h1,
+.settings-head h2 {
+  margin: 0;
+  padding-right: 0;
+  font-size: clamp(28px, 4vw, 32px);
+  font-weight: var(--weight-black);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.modal .close,
+.settings-close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  font-size: 26px;
+}
+
+.modal .close:hover,
+.settings-close:hover {
+  background: var(--mist);
+  color: var(--ink);
+}
+
+.modal .setting-group,
+.settings-sheet .setting-group {
+  margin: 0 0 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.modal .setting-group:last-child,
+.settings-sheet .setting-group:last-child {
+  margin-bottom: 0;
+}
+
+.modal .setting-group h2,
+.modal .setting-group h3,
+.settings-sheet .setting-group h2,
+.settings-sheet .setting-group h3 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+
+.modal .setting-group > p,
+.settings-sheet .setting-group > p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+.modal .setting-row > label,
+.settings-sheet .setting-row > label {
+  min-width: 0;
+}
+
+.modal .setting-row:last-child,
+.settings-sheet .setting-row:last-child {
+  border-bottom: 0;
+}
+
+.modal .setting-row small,
+.settings-sheet .setting-row small {
+  display: block;
+  color: var(--muted);
+}
+
+.modal .text-action,
+.settings-sheet .text-action {
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: var(--weight-bold);
+}
+
+.modal .text-action:hover,
+.settings-sheet .text-action:hover {
+  background: var(--blue-hover);
+}
+
+.service-inline {
+  margin: 0 0 var(--space-4);
+  padding: 12px 0 4px;
+}
+
+.service-inline label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--ink);
+}
+
+.service-inline input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+.service-inline .service-error {
+  margin: var(--space-2) 0 0;
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.service-inline .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.family-editor label + input + label {
+  margin-top: var(--space-3);
+}
+
+.origin-editor {
+  min-width: 0;
+}
+
+.origin-editor input {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .modal,
+  .settings-panel {
+    padding: 24px;
+    align-items: start;
+  }
+
+  .modal > .settings,
+  .settings-sheet {
+    width: min(var(--sheet-max), 100%);
+    max-height: calc(100dvh - 48px);
+    padding: 28px 32px 32px;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-head,
+  .settings-head {
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+}
+
+@media (max-width: 520px) {
+  .modal,
+  .settings-panel {
+    padding: 12px;
+  }
+
+  .modal > .settings,
+  .settings-sheet {
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    padding: 20px 16px 24px;
+    border-radius: 18px;
+  }
+
+  .modal-head,
+  .settings-head {
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .modal-head h1,
+  .settings-head h2 {
+    font-size: 28px;
+  }
+
+  .modal .setting-row,
+  .settings-sheet .setting-row {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2);
+  }
+
+  .modal .setting-row small,
+  .settings-sheet .setting-row small {
+    grid-column: 1 / -1;
+  }
+
+  .modal .setting-row .text-action,
+  .modal .setting-row select,
+  .settings-sheet .setting-row .text-action,
+  .settings-sheet .setting-row select {
+    justify-self: start;
+  }
+}

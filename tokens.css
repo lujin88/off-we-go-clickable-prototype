@@ -1,0 +1,150 @@
+/* Off We Go design tokens — single source of truth.
+   Load this file first. Page CSS must not redefine these names.
+   Media queries cannot read these breakpoint custom properties; keep the
+   matching px values in @media and treat the comments as the contract. */
+
+:root {
+  /* Color — light (current product) */
+  --ink: #10244b;
+  --ink-soft: #4d6280;
+  --blue: #145ce6;
+  --blue2: #0d3d99;
+  --blue-soft: #edf4ff;
+  --blue-hover: #dfeaff;
+  --paper: #fff;
+  --on-accent: #fff;
+  --on-hero: #fff;
+  --mist: #f4f7fb;
+  --line: #e4ebf3;
+  --muted: var(--ink-soft); /* #4d6280 on --paper ≈ 5.4:1 AA */
+  --warm: #fff9ef;
+  --warm-ink: #725a36;
+  --success: #18794e;
+  --warning: #805818;
+  --danger: #b53838;
+  --danger-soft: #fff0ef;
+  --info: var(--blue);
+  --overlay: rgba(16, 36, 75, 0.38);
+  --photo-shade: rgba(5, 24, 54, 0.48);
+
+  /* Typography */
+  --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-body: 16px;
+  --text-lg: 19px;
+  --text-xl: 24px;
+  --text-display: clamp(32px, 6vw, 52px);
+  --leading: 1.5;
+  --leading-tight: 1.15;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 650;
+  --weight-bold: 750;
+  --weight-black: 850;
+  --tracking-display: -0.04em;
+
+  /* Spacing — 4px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Layout */
+  --page-max: 1360px;
+  --sheet-max: 780px;
+  --flow-max: 920px;
+  --chrome-x: 32px;
+  --chrome-y: 18px;
+  --chrome-h: 56px;
+  /* Breakpoints: 520 phone / 768 tablet / 1100 desktop */
+
+  /* Control */
+  --touch-min: 44px;
+  --control-height: 44px;
+  --field-height: 44px;
+  --field-radius: 10px;
+  --field-padding: 10px 12px;
+  --field-border: #dce5ef;
+  --control-border: #c5d0de;
+  --field-focus-ring: 0 0 0 3px rgba(20, 92, 230, 0.12);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --radius: var(--radius-lg);
+
+  /* Elevation */
+  --shadow-1: 0 8px 22px rgba(24, 55, 102, 0.035);
+  --shadow-2: 0 13px 31px rgba(20, 92, 230, 0.1);
+  --shadow-3: 0 24px 64px rgba(16, 36, 75, 0.2);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 140ms;
+  --duration: 180ms;
+  --press-scale: 0.96;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --chrome-x: 20px;
+    --chrome-y: 12px;
+    --chrome-h: 48px;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --chrome-x: 16px;
+    --chrome-y: 10px;
+  }
+}
+
+/* Dark tokens are specified for a later, dedicated pass.
+   Do not apply via prefers-color-scheme or a toggle until that work is scheduled.
+   The product stays light-only. */
+[data-theme="dark"] {
+  --ink: #e8eef8;
+  --ink-soft: #9aabc4;
+  --blue: #4d8dff;
+  --blue2: #9ec0ff;
+  --blue-soft: #16315f;
+  --blue-hover: #1c3c72;
+  --paper: #0f1728;
+  --on-accent: #0f1728;
+  --on-hero: #e8eef8;
+  --mist: #172136;
+  --line: #2a3a55;
+  --muted: #9aabc4;
+  --warm: #2a2418;
+  --warm-ink: #e4c48a;
+  --success: #3dba7a;
+  --warning: #e0b15a;
+  --danger: #f07171;
+  --danger-soft: #3a1d1d;
+  --overlay: rgba(4, 10, 22, 0.64);
+  --photo-shade: rgba(4, 10, 22, 0.55);
+  --field-border: #2a3a55;
+  --control-border: #2a3a55;
+  --field-focus-ring: 0 0 0 3px rgba(77, 141, 255, 0.28);
+  --shadow-1: 0 8px 22px rgba(0, 0, 0, 0.28);
+  --shadow-2: 0 13px 31px rgba(77, 141, 255, 0.16);
+  --shadow-3: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration: 0.01ms;
+  }
+}

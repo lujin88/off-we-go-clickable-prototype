@@ -78,7 +78,7 @@
 
   async function renderModeAwareTransport(plan) {
     const grid=document.querySelector('#transport .transport-grid'); if(!grid) return;
-    let origin=plan.origin || 'Kilchberg, Zürich'; try{origin=(await OffWeGoState.ready).state?.preferences?.origin||origin;}catch{}
+    let origin=plan.origin || 'Zürich'; try{origin=(await OffWeGoState.ready).state?.preferences?.origin||origin;}catch{}
     let decision;
     try{const response=await fetch('/api/transport-options',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({origin,destination:plan.destination,departureTime:departureIso(plan)})});decision=await response.json();if(!response.ok)throw new Error(decision.error);    }catch{const flight=/航班|flight|飞机/i.test(plan.transport||'')||/tenerife|特内里费/i.test(plan.destination);decision={modes:flight?['flight']:['train'],reason:flight?t('transport.prefer_flight'):t('transport.show_recommended')};}
     setText('#transport .section-head h2',decision.reason || t('transport.compare_sensible'));document.querySelector('#transport .section-head>p')?.remove();
@@ -98,7 +98,7 @@
     document.querySelector('#transport .section-head>p')?.remove();
     setText('#transport .section-head h2', t('transport.train_or_drive'));
     if (!grid) return;
-    let origin=plan.origin || 'Kilchberg, Zürich';
+    let origin=plan.origin || 'Zürich';
     try { origin=(await OffWeGoState.ready).state?.preferences?.origin || origin; } catch {}
     grid.innerHTML=`<article class="transport-card transport-choice recommended"><div class="transport-choice-head"><span class="transport-mode-icon"><i class="ri-train-line" aria-hidden="true"></i></span><div><div class="transport-label">${t('transport.recommend_train')}</div><h2>${escapeHtml(origin)} → Lugano</h2></div></div><div class="transport-status">${t('transport.querying_times')}</div><div class="facts"><span>${t('transport.no_parking')}</span><span>${t('transport.city_centre')}</span><span>${t('transport.family_ok')}</span></div><div class="price-line"><b>${t('common.verifying')}</b><small>OJP · Google Search</small></div><div class="api-note">${t('transport.price_disclaimer')}</div></article><article class="transport-card transport-choice"><div class="transport-choice-head"><span class="transport-mode-icon"><i class="ri-car-line" aria-hidden="true"></i></span><div><div class="transport-label">${t('transport.backup_drive')}</div><h2>${escapeHtml(origin)} → Lugano</h2></div></div><div class="transport-status drive-status">${t('transport.drive_calculating')}</div><div class="drive-costs"><div><span>${t('transport.fuel_return')}</span><b>${t('transport.checking')}</b></div><div><span>${t('transport.vignette')}</span><b>CHF 40</b></div><div><span>${t('transport.estimate_total')}</span><b>${t('transport.checking')}</b></div></div><div class="api-note">${t('transport.parking_excluded')}</div></article>`;
     const [trainCard,driveCard]=grid.querySelectorAll('.transport-card');

@@ -3,7 +3,7 @@
 
   const STORAGE_KEY = 'offwego:prototype-state';
   const defaults = {
-    preferences: { language: 'zh', currency: 'CHF', origin: 'Kilchberg, Zürich', pace: '轻松' },
+    preferences: { language: 'zh', currency: 'CHF', origin: 'Zürich', pace: '轻松' },
     family: [],
     travellers: { adults: 2, children: 0, pets: 0 },
     trips: [],
@@ -184,7 +184,7 @@
     }
     if (apiPath === '/api/places/autocomplete' && method === 'POST') {
       const query = String(payload.input || '').toLowerCase();
-      const all = ['Kilchberg, Zürich', 'Zürich HB', 'Zürich Flughafen', 'Lugano'];
+      const all = ['Zürich', 'Zürich HB', 'Zürich Flughafen', 'Lugano'];
       return json(200, { suggestions: all.filter(item => item.toLowerCase().includes(query) || query.length < 2).slice(0, 5).map(text => ({ text })) });
     }
     if (apiPath === '/api/journey-quote' && method === 'POST') return json(200, journeyQuote(payload));

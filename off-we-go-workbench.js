@@ -34,7 +34,7 @@ window.addEventListener('load',()=>setTimeout(async()=>{
       document.querySelector('#profile')?.remove();document.querySelector('#profileMenu')?.remove();
       const originRow=document.querySelector('#originRow')||[...document.querySelectorAll('.setting-row')].find(row=>row.querySelector('b')?.textContent.includes(t('settings.origin'))||row.querySelector('b')?.textContent.includes('默认出发地'));
       if(originRow){if(!originRow.querySelector('#originValue'))originRow.querySelector('span').id='originValue';if(!originRow.querySelector('#changeOrigin'))originRow.querySelector('button').id='changeOrigin';}
-      let origin='Kilchberg, Zürich';try{await OffWeGoState.ready;origin=OffWeGoState.get().state.preferences?.origin||origin;}catch{return;}
+      let origin='Zürich';try{await OffWeGoState.ready;origin=OffWeGoState.get().state.preferences?.origin||origin;}catch{return;}
       document.querySelector('#originValue').textContent=origin;
       document.querySelector('#originValue')?.setAttribute('aria-live','polite');
     },300));
@@ -1156,7 +1156,7 @@ window.addEventListener('load', () => setTimeout(() => {
         displayPrice(summary,t('fare.train_price'),t('copy.checking_fares'),t('fare.ojp_google'));
         try{
           await OffWeGoState.ready;
-          const origin=/zürich|zurich|苏黎世|kilchberg/i.test(OffWeGoState.get().state?.preferences?.origin || '')?'Zürich HB':(OffWeGoState.get().state?.preferences?.origin || 'Zürich HB');
+          const origin=/zürich|zurich|苏黎世/i.test(OffWeGoState.get().state?.preferences?.origin || '')?'Zürich HB':(OffWeGoState.get().state?.preferences?.origin || 'Zürich HB');
           const resolved=typeof window.offWeGoDateRange==='function'?window.offWeGoDateRange():null;
           const matched=(document.querySelector('#manualDates')?.value || '').match(/(\d{4}-\d{2}-\d{2})/);
           const departureDate=resolved?.[0] || matched?.[1] || new Date(Date.now()+86400000).toISOString().slice(0,10);
@@ -1177,7 +1177,7 @@ window.addEventListener('load', () => setTimeout(() => {
       try{
         await OffWeGoState.ready;const state=OffWeGoState.get().state || {};
         const stayDays=Math.max(1,Number(document.querySelector('#customDuration')?.value)||5);
-        const response=await fetch('/api/flights/window',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({originLocationCode:/zürich|zurich|苏黎世|kilchberg/i.test(state.preferences?.origin || '')?'ZRH':'',destinationLocationCode:airport,startDate:dates[1],endDate:dates[2],stayDays,adults:state.travellers?.adults||1,children:state.travellers?.children||0})});
+        const response=await fetch('/api/flights/window',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({originLocationCode:/zürich|zurich|苏黎世/i.test(state.preferences?.origin || '')?'ZRH':'',destinationLocationCode:airport,startDate:dates[1],endDate:dates[2],stayDays,adults:state.travellers?.adults||1,children:state.travellers?.children||0})});
         const quote=await response.json();if(!response.ok)throw new Error(quote.error || t('research.flight_unavailable'));
         const lowest=quote.recommended || quote.lowest;
         const dateLabel=value=>window.OffWeGoI18n?.format?.date(value,{month:'long',day:'numeric'})||value;
@@ -1342,7 +1342,7 @@ window.addEventListener('load', () => setTimeout(() => {
           accommodation:window.tripAccommodationPreference || t('research.stay_either'),
           travellers:window.OffWeGoI18n?.format?.family({adults:state.travellers?.adults||0,children:state.travellers?.children||0,pets:state.travellers?.pets||0}) || ''
         };
-        const originAirport=/zürich|zurich|苏黎世|kilchberg/i.test(profile.origin || '') ? 'ZRH' : '';
+        const originAirport=/zürich|zurich|苏黎世/i.test(profile.origin || '') ? 'ZRH' : '';
         const dateRange=chosenDateRange?['',...chosenDateRange]:(profile.date || '').match(/(\d{4}-\d{2}-\d{2}).*?(\d{4}-\d{2}-\d{2})/);
         const stayDays=Math.max(1,Number(customDays) || 5);
         const response=await fetch('/api/recommendations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(profile)});

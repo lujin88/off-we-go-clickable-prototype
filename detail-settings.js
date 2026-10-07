@@ -44,7 +44,7 @@
       try { storedLanguage = localStorage.getItem('offwego:language'); } catch {}
       language.value = (storedLanguage === 'en' || storedLanguage === 'zh') ? storedLanguage : (preferences.language || 'zh');
       currency.value = preferences.currency || 'CHF';
-      origin.textContent = preferences.origin || 'Kilchberg, Zürich';
+      origin.textContent = preferences.origin || 'Zürich';
       family.childNodes[0].textContent = t('family.count', {
         adults: familyCount(state, '成年人', 2),
         children: familyCount(state, '孩子', 0)
@@ -143,7 +143,7 @@
         return;
       }
       await OffWeGoState.ready;
-      const current = OffWeGoState.get().state?.preferences?.origin || origin.textContent || 'Kilchberg, Zürich';
+      const current = OffWeGoState.get().state?.preferences?.origin || origin.textContent || 'Zürich';
       origin.hidden = true;
       const editor = document.createElement('div');
       editor.className = 'origin-editor';
